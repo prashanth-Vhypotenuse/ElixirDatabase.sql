@@ -1,0 +1,23 @@
+﻿CREATE TABLE [dbo].[Content] (
+	[Id] INT PRIMARY KEY IDENTITY(1, 1),
+	[Title] NVARCHAR(255) NOT NULL,
+	[SubTitle] NVARCHAR(255),
+	[Description] TEXT,
+	[Icon] NVARCHAR(255),
+	[ImagePath] NVARCHAR(255),
+	[LinkText] NVARCHAR(255),
+	[LinkPath] NVARCHAR(255),
+	[LinkIcon] NVARCHAR(255),
+	[Type] INT NOT NULL,
+	[CreatedBy] INT NOT NULL,
+	[CreatedDate] DATETIME DEFAULT GETDATE(),
+	[UpdatedBy] INT,
+	[UpdatedDate] DATETIME,
+	[DeletedBy] INT,
+	[IsDeleted] BIT DEFAULT 0,
+	CONSTRAINT [FK_Content_Type] FOREIGN KEY([Type]) REFERENCES [ContentType]([Id]),
+	CONSTRAINT [FK_Content_CreatedBy] FOREIGN KEY([CreatedBy]) REFERENCES [User]([Id]),
+	CONSTRAINT [FK_Content_UpdatedBy] FOREIGN KEY([UpdatedBy]) REFERENCES [User]([Id]),
+	CONSTRAINT [FK_Content_DeletedBy] FOREIGN KEY([DeletedBy]) REFERENCES [User]([Id]),
+);
+GO
