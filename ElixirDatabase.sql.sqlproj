@@ -66,5 +66,7 @@
     <Build Include="dbo\Tables\User.sql" />
     <Build Include="dbo\Tables\Content.sql" />
     <Build Include="dbo\Tables\Menu.sql" />
+    <Build Include="dbo\Tables\ContentType.sql" />
+    <Build Include="dbo\StoredProcedures\GetContentTypes.sql" />
   </ItemGroup>
 </Project>

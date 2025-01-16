@@ -5,15 +5,15 @@
 	[OrderNumber] INT NOT NULL,
 	[ParentId] INT,
 	[Icon] NVARCHAR(100),
-	[Type] BIT DEFAULT 0 CHECK ([Type] IN (0, 1)), -- 0 => Header, 1 => Footer
+	[Type] BIT DEFAULT 0,
 	[CreatedBy] INT NOT NULL,
-	[CreatedDate] DATETIME NOT NULL,
+	[CreatedDate] DATETIME DEFAULT GETDATE(),
 	[UpdatedBy] INT,
 	[UpdatedDate] DATETIME,
 	[DeletedBy] INT,
-	[IsDeleted] BIT NOT NULL DEFAULT 0,
-	FOREIGN KEY([CreatedBy]) REFERENCES [User]([Id]),
-	FOREIGN KEY([UpdatedBy]) REFERENCES [User]([Id]),
-	FOREIGN KEY([DeletedBy]) REFERENCES [User]([Id]),
+	[IsDeleted] BIT DEFAULT 0,
+	CONSTRAINT [FK_Menu_CreatedBy] FOREIGN KEY([CreatedBy]) REFERENCES [User]([Id]),
+	CONSTRAINT [FK_Menu_UpdatedBy] FOREIGN KEY([UpdatedBy]) REFERENCES [User]([Id]),
+	CONSTRAINT [FK_Menu_DeletedBy] FOREIGN KEY([DeletedBy]) REFERENCES [User]([Id]),
 );
 GO

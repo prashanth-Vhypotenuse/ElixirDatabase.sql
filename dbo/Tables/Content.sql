@@ -8,15 +8,16 @@
 	[LinkText] NVARCHAR(255),
 	[LinkPath] NVARCHAR(255),
 	[LinkIcon] NVARCHAR(255),
-	[Type] NVARCHAR(55) NOT NULL CHECK ([Type] IN ('TopBanner', 'Banners', 'ExpertConsultancySupport', 'Services', 'ChooseElixir', 'Contact', 'ThingsYouGet', 'RequestCall', 'GlobalLeaders', 'Achivements', 'Clients', 'Partners', 'News')),
+	[Type] INT NOT NULL,
 	[CreatedBy] INT NOT NULL,
-	[CreatedDate] DATETIME NOT NULL,
+	[CreatedDate] DATETIME DEFAULT GETDATE(),
 	[UpdatedBy] INT,
 	[UpdatedDate] DATETIME,
 	[DeletedBy] INT,
-	[IsDeleted] BIT DEFAULT 0 NOT NULL,
-	FOREIGN KEY([CreatedBy]) REFERENCES [User]([Id]),
-	FOREIGN KEY([UpdatedBy]) REFERENCES [User]([Id]),
-	FOREIGN KEY([DeletedBy]) REFERENCES [User]([Id])
-)
+	[IsDeleted] BIT DEFAULT 0,
+	CONSTRAINT [FK_Content_Type] FOREIGN KEY([Type]) REFERENCES [ContentType]([Id]),
+	CONSTRAINT [FK_Content_CreatedBy] FOREIGN KEY([CreatedBy]) REFERENCES [User]([Id]),
+	CONSTRAINT [FK_Content_UpdatedBy] FOREIGN KEY([UpdatedBy]) REFERENCES [User]([Id]),
+	CONSTRAINT [FK_Content_DeletedBy] FOREIGN KEY([DeletedBy]) REFERENCES [User]([Id]),
+);
 GO

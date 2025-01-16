@@ -3,6 +3,14 @@
 AS
 BEGIN
     SET NOCOUNT ON;
-    SELECT * FROM [Menu]
-    WHERE [Type] = @Type AND [IsDeleted] = 0;
+    SELECT
+		[M].[Id],
+		[M].[Name],
+		[M].[Link],
+		[M].[OrderNumber],
+		[M].[ParentId],
+		[M].[Icon],
+		[M].[Type]
+	FROM [dbo].[Menu] AS [M]
+    WHERE [M].[Type] = @Type AND [M].[IsDeleted] = 0;
 END
